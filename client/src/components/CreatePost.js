@@ -26,7 +26,7 @@ function CreatePost() {
       return;
     }
 
-    axios.post('http://localhost:5000/api/posts', { title, content, answers, nickname })
+    axios.post('http://34.47.87.5:5000/api/posts', { title, content, answers, nickname })
       .then(() => {
         navigate('/');
       })
