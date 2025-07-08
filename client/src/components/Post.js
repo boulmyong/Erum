@@ -67,7 +67,7 @@ function Post() {
       <div className="card my-3">
         <div className="card-body">
           <h1 className="card-title">{post.title}</h1>
-          <h6 className="card-subtitle mb-2 text-muted">by {post.nickname}</h6>
+          <h6 className="card-subtitle mb-2 text-muted">by {post.nickname} - {new Date(post.createdAt).toLocaleString()}</h6>
           <hr />
           {post.content && (
             <div className="mb-3">

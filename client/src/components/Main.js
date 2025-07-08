@@ -55,7 +55,7 @@ function Main() {
             <Link to={`/post/${post.id}`} className="text-decoration-none text-dark flex-grow-1">
               <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">{post.title}</h5>
-                <small>{post.nickname}</small>
+                <small>{post.nickname} - {new Date(post.createdAt).toLocaleString()}</small>
               </div>
             </Link>
             {nickname === 'root' && (

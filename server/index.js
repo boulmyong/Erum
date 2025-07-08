@@ -34,7 +34,8 @@ const saveData = () => {
 // --- API Endpoints ---
 
 app.get('/api/posts', (req, res) => {
-  res.json(posts);
+  const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  res.json(sortedPosts);
 });
 
 app.get('/api/posts/:id', (req, res) => {
@@ -54,7 +55,8 @@ app.post('/api/posts', (req, res) => {
     content,
     answers,
     nickname,
-    comments: []
+    comments: [],
+    createdAt: new Date().toISOString()
   };
   posts.push(newPost);
   saveData();
