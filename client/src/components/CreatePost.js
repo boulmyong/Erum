@@ -26,7 +26,7 @@ function CreatePost() {
       return;
     }
 
-    axios.post('http://34.47.87.5:5000/api/posts', { title, content, answers, nickname })
+    axios.post('http://localhost:5000/api/posts', { title, content, answers, nickname })
       .then(() => {
         navigate('/');
       })
@@ -37,7 +37,7 @@ function CreatePost() {
 
   return (
     <div>
-      <h1 className="my-3">새 글 작성</h1>
+      <img src="/images/cr.png" alt="새 글 작성" className="my-3" style={{ height: '130px' }} />
       <div className="mb-3">
         <label htmlFor="title" className="form-label">제목 (필수)</label>
         <input

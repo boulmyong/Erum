@@ -24,7 +24,7 @@ function Login() {
       <div className="col-md-6">
         <div className="card">
           <div className="card-body">
-            <h1 className="card-title text-center">Erum</h1>
+            <img src="/images/logo.png" alt="Erum Logo" className="card-title d-block mx-auto" style={{ height: '120px' }} />
             <div className="input-group mb-3">
               <input
                 type="text"

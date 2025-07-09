@@ -12,7 +12,7 @@ function Main() {
   }, []);
 
   const fetchPosts = () => {
-    axios.get('http://34.47.87.5:5000/api/posts')
+    axios.get('http://localhost:5000/api/posts')
       .then(response => {
         setPosts(response.data);
       })
@@ -29,7 +29,7 @@ function Main() {
 
   const handleDeletePost = (postId) => {
     if (window.confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
-      axios.delete(`http://34.47.87.5:5000/api/posts/${postId}`, { data: { nickname } })
+      axios.delete(`http://localhost:5000/api/posts/${postId}`, { data: { nickname } })
         .then(() => {
           fetchPosts(); // Refresh posts after deletion
         })
@@ -43,7 +43,7 @@ function Main() {
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center my-3">
-        <h1>Erum</h1>
+        <img src="/images/logo.png" alt="Erum Logo" style={{ height: '100px' }} />
         <div>
           <Link to="/create" className="btn btn-primary me-2">+ 글 작성</Link>
           <button className="btn btn-secondary" onClick={handleLogout}>로그아웃</button>
