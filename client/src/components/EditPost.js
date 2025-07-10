@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const questions = [
@@ -9,16 +9,35 @@ const questions = [
   '4. 이 경험이 나의 꿈과 어떤 연결고리를 만들어 줬는가?'
 ];
 
-function CreatePost() {
+function EditPost() {
+  const { id } = useParams();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [answers, setAnswers] = useState({ q1: '', q2: '', q3: '', q4: '' });
-  const [imageUrl, setImageUrl] = useState(''); // State for image URL
+  const [imageUrl, setImageUrl] = useState('');
   const navigate = useNavigate();
+  const nickname = localStorage.getItem('nickname') || sessionStorage.getItem('nickname');
 
-  const handleAnswerChange = (e, qIndex) => {
-    setAnswers({ ...answers, [`q${qIndex + 1}`]: e.target.value });
-  };
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/posts/${id}`)
+      .then(response => {
+        const post = response.data;
+        if (nickname !== 'root' && post.nickname !== nickname) {
+          alert('수정할 권한이 없습니다.');
+          navigate(`/post/${id}`);
+          return;
+        }
+        setTitle(post.title);
+        setContent(post.content);
+        setAnswers(post.answers);
+        setImageUrl(post.imageUrl || '');
+      })
+      .catch(error => {
+        console.error('Error fetching post:', error);
+        alert('게시물을 불러오는데 실패했습니다.');
+        navigate('/');
+      });
+  }, [id, nickname, navigate]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,9 +47,7 @@ function CreatePost() {
     formData.append('image', file);
 
     axios.post('http://localhost:5000/api/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+      headers: { 'Content-Type': 'multipart/form-data' }
     })
     .then(response => {
       setImageUrl(response.data.imageUrl);
@@ -42,24 +59,24 @@ function CreatePost() {
   };
 
   const handleSubmit = () => {
-    const nickname = localStorage.getItem('nickname') || sessionStorage.getItem('nickname');
     if (title.trim() === '' || Object.values(answers).some(answer => answer.trim() === '')) {
       alert('제목과 4가지 질문은 모두 필수 항목입니다.');
       return;
     }
 
-    axios.post('http://localhost:5000/api/posts', { title, content, answers, nickname, imageUrl })
+    axios.put(`http://localhost:5000/api/posts/${id}`, { title, content, answers, nickname, imageUrl })
       .then(() => {
-        navigate('/');
+        navigate(`/post/${id}`);
       })
       .catch(error => {
-        console.error('Error creating post:', error);
+        console.error('Error updating post:', error);
+        alert('게시물 수정에 실패했습니다.');
       });
   };
 
   return (
     <div>
-      <img src="/images/cr.png" alt="새 글 작성" className="my-3" style={{ height: '130px' }} />
+      <h2 className="my-3">게시물 수정</h2>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">제목 (필수)</label>
         <input
@@ -103,13 +120,13 @@ function CreatePost() {
             className="form-control"
             rows="3"
             value={answers[`q${index + 1}`]}
-            onChange={(e) => handleAnswerChange(e, index)}
+            onChange={(e) => setAnswers({ ...answers, [`q${index + 1}`]: e.target.value })}
           ></textarea>
         </div>
       ))}
-      <button className="btn btn-primary" onClick={handleSubmit}>등록</button>
+      <button className="btn btn-primary" onClick={handleSubmit}>수정 완료</button>
     </div>
   );
 }
 
-export default CreatePost;
+export default EditPost;

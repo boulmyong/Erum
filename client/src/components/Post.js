@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'; // Import Link
 import axios from 'axios';
 
 const questions = [
@@ -58,6 +58,19 @@ function Post() {
     }
   };
 
+  const handleDeletePost = () => {
+    if (window.confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
+      axios.delete(`http://localhost:5000/api/posts/${id}`, { data: { nickname } })
+        .then(() => {
+          window.location.href = '/';
+        })
+        .catch(error => {
+          console.error('Error deleting post:', error);
+          alert('삭제할 권한이 없습니다.');
+        });
+    }
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -66,12 +79,26 @@ function Post() {
     <div>
       <div className="card my-3">
         <div className="card-body">
-          <h1 className="card-title">{post.title}</h1>
-          <h6 className="card-subtitle mb-2 text-muted">by {post.nickname} - {new Date(post.createdAt).toLocaleString()}</h6>
+          <div className="d-flex justify-content-between align-items-center">
+            <h1 className="card-title">{post.title}</h1>
+            {(nickname === 'root' || nickname === post.nickname) && (
+              <div className="btn-group">
+                <Link to={`/edit/${id}`} className="btn btn-primary">수정</Link>
+                <button className="btn btn-danger" onClick={handleDeletePost}>
+                  게시물 삭제
+                </button>
+              </div>
+            )}
+          </div>
+          <h6 className="card-subtitle mb-2 text-muted">by <Link to={`/user/${post.nickname}`} className="text-muted">{post.nickname}</Link> - {new Date(post.createdAt).toLocaleString()}</h6>
           <hr />
+          {post.imageUrl && (
+            <div className="mb-3">
+              <img src={`http://localhost:5000${post.imageUrl}`} alt={post.title} style={{ maxWidth: '100%' }} />
+            </div>
+          )}
           {post.content && (
             <div className="mb-3">
-              <h5>내용</h5>
               <p style={{ whiteSpace: 'pre-wrap' }}>{post.content}</p>
             </div>
           )}
@@ -103,7 +130,7 @@ function Post() {
             {post.comments.map((c, index) => (
               <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                 <div style={{ whiteSpace: 'pre-wrap' }}><strong>{c.nickname}:</strong> {c.content}</div>
-                {nickname === 'root' && (
+                {(nickname === 'root' || nickname === c.nickname) && (
                   <button className="btn btn-danger btn-sm" onClick={() => handleDeleteComment(index)}>삭제</button>
                 )}
               </li>

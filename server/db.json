@@ -1,23 +1,5 @@
 [
   {
-    "id": 3,
-    "title": "11111",
-    "content": "",
-    "answers": {
-      "q1": "1",
-      "q2": "1",
-      "q3": "1",
-      "q4": "1"
-    },
-    "nickname": "원용우",
-    "comments": [
-      {
-        "content": "2",
-        "nickname": "원용우"
-      }
-    ]
-  },
-  {
     "id": 4,
     "title": "1234",
     "content": "12345",
@@ -72,19 +54,5 @@
     "nickname": "원용우",
     "comments": [],
     "createdAt": "2025-07-09T05:36:04.271Z"
-  },
-  {
-    "id": 8,
-    "title": "1",
-    "content": "",
-    "answers": {
-      "q1": "1",
-      "q2": "1",
-      "q3": "1",
-      "q4": "1"
-    },
-    "nickname": "원용우",
-    "comments": [],
-    "createdAt": "2025-07-09T05:36:10.915Z"
   }
 ]

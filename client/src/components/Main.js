@@ -55,10 +55,10 @@ function Main() {
             <Link to={`/post/${post.id}`} className="text-decoration-none text-dark flex-grow-1">
               <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">{post.title}</h5>
-                <small>{post.nickname} - {new Date(post.createdAt).toLocaleString()}</small>
+                <small><Link to={`/user/${post.nickname}`} className="text-muted text-decoration-none">{post.nickname}</Link> - {new Date(post.createdAt).toLocaleString()}</small>
               </div>
             </Link>
-            {nickname === 'root' && (
+            {(nickname === 'root' || nickname === post.nickname) && (
               <button className="btn btn-danger btn-sm ms-3" onClick={() => handleDeletePost(post.id)}>삭제</button>
             )}
           </div>
