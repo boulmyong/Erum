@@ -54,5 +54,20 @@
     "nickname": "원용우",
     "comments": [],
     "createdAt": "2025-07-09T05:36:04.271Z"
+  },
+  {
+    "id": 8,
+    "title": "1",
+    "content": "1",
+    "answers": {
+      "q1": "13",
+      "q2": "123",
+      "q3": "123",
+      "q4": "123"
+    },
+    "nickname": "원용우",
+    "imageUrl": "",
+    "comments": [],
+    "createdAt": "2025-07-10T00:48:22.409Z"
   }
 ]

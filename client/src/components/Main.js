@@ -12,7 +12,7 @@ function Main() {
   }, []);
 
   const fetchPosts = () => {
-    axios.get('http://localhost:5000/api/posts')
+    axios.get('http://34.47.87.5:5000/api/posts')
       .then(response => {
         setPosts(response.data);
       })
@@ -29,7 +29,7 @@ function Main() {
 
   const handleDeletePost = (postId) => {
     if (window.confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:5000/api/posts/${postId}`, { data: { nickname } })
+      axios.delete(`http://34.47.87.5:5000/api/posts/${postId}`, { data: { nickname } })
         .then(() => {
           fetchPosts(); // Refresh posts after deletion
         })
