@@ -19,7 +19,7 @@ function EditPost() {
   const nickname = localStorage.getItem('nickname') || sessionStorage.getItem('nickname');
 
   useEffect(() => {
-    axios.get(`http://34.47.87.5:5000/api/posts/${id}`)
+    axios.get(`http://localhost:5000/api/posts/${id}`)
       .then(response => {
         const post = response.data;
         if (nickname !== 'root' && post.nickname !== nickname) {
@@ -46,7 +46,7 @@ function EditPost() {
     const formData = new FormData();
     formData.append('image', file);
 
-    axios.post('http://34.47.87.5:5000/api/upload', formData, {
+    axios.post('http://localhost:5000/api/upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
     .then(response => {
@@ -64,7 +64,7 @@ function EditPost() {
       return;
     }
 
-    axios.put(`http://34.47.87.5:5000/api/posts/${id}`, { title, content, answers, nickname, imageUrl })
+    axios.put(`http://localhost:5000/api/posts/${id}`, { title, content, answers, nickname, imageUrl })
       .then(() => {
         navigate(`/post/${id}`);
       })
@@ -107,7 +107,7 @@ function EditPost() {
         />
         {imageUrl && (
           <div className="mt-3">
-            <img src={`http://34.47.87.5:5000${imageUrl}`} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+            <img src={`http://localhost:5000${imageUrl}`} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px' }} />
           </div>
         )}
       </div>

@@ -17,3 +17,6 @@ yarn-error.log*
 
 # Other
 .DS_Store
+
+# Data
+/server/db.json

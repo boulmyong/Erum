@@ -7,7 +7,7 @@ function UserProfile() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://34.47.87.5:5000/api/posts/user/${nickname}`)
+    axios.get(`http://localhost:5000/api/posts/user/${nickname}`)
       .then(response => {
         setPosts(response.data);
       })

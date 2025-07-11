@@ -1,0 +1,53 @@
+/* 둥글고 몽실한 스타일을 위한 Custom CSS */
+
+/* 카드 (게시물 목록, 로그인 폼 등) */
+.card {
+  border-radius: 1.5rem; /* 모서리를 더 둥글게 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+  border: none; /* 기본 테두리 제거 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* 마우스 올리면 살짝 위로 이동 */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* 그림자 강조 */
+}
+
+/* 버튼 */
+.btn {
+  border-radius: 50px; /* 알약 모양으로 둥글게 */
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #5865F2; /* 부드러운 파란색 계열 */
+  border-color: #5865F2;
+}
+
+.btn-primary:hover {
+  background-color: #4f5bda;
+  border-color: #4f5bda;
+  transform: translateY(-2px);
+}
+
+/* 입력창 */
+.form-control {
+  border-radius: 1rem; /* 모서리를 둥글게 */
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(88, 101, 242, 0.25); /* 포커스 시 부드러운 효과 */
+  border-color: #5865F2;
+}
+
+/* 리스트 그룹 아이템 (게시물 목록) */
+.list-group-item {
+  border-radius: 1rem !important; /* !important로 부트스트랩 스타일 덮어쓰기 */
+  margin-bottom: 1rem;
+  border: 1px solid #f0f0f0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
