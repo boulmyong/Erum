@@ -20,7 +20,7 @@ function Post() {
   }, []);
 
   const fetchPost = () => {
-    axios.get(`http://localhost:5000/api/posts/${id}`)
+    axios.get(`http://34.47.87.5:5000/api/posts/${id}`)
       .then(response => {
         setPost(response.data);
       })
@@ -35,7 +35,7 @@ function Post() {
       return;
     }
 
-    axios.post(`http://localhost:5000/api/posts/${id}/comments`, { content: comment, nickname })
+    axios.post(`http://34.47.87.5:5000/api/posts/${id}/comments`, { content: comment, nickname })
       .then(() => {
         setComment('');
         fetchPost(); // Re-fetch post to show the new comment
@@ -47,7 +47,7 @@ function Post() {
 
   const handleDeleteComment = (commentIndex) => {
     if (window.confirm('정말로 이 댓글을 삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:5000/api/posts/${id}/comments/${commentIndex}`, { data: { nickname } })
+      axios.delete(`http://34.47.87.5:5000/api/posts/${id}/comments/${commentIndex}`, { data: { nickname } })
         .then(() => {
           fetchPost(); // Refresh post after deletion
         })
@@ -60,7 +60,7 @@ function Post() {
 
   const handleDeletePost = () => {
     if (window.confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:5000/api/posts/${id}`, { data: { nickname } })
+      axios.delete(`http://34.47.87.5:5000/api/posts/${id}`, { data: { nickname } })
         .then(() => {
           window.location.href = '/';
         })
@@ -94,7 +94,7 @@ function Post() {
           <hr />
           {post.imageUrl && (
             <div className="mb-3">
-              <img src={`http://localhost:5000${post.imageUrl}`} alt={post.title} style={{ maxWidth: '100%' }} />
+              <img src={`http://34.47.87.5:5000${post.imageUrl}`} alt={post.title} style={{ maxWidth: '100%' }} />
             </div>
           )}
           {post.content && (

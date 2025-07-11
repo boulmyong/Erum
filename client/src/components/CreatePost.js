@@ -27,7 +27,7 @@ function CreatePost() {
     const formData = new FormData();
     formData.append('image', file);
 
-    axios.post('http://localhost:5000/api/upload', formData, {
+    axios.post('http://34.47.87.5:5000/api/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -48,7 +48,7 @@ function CreatePost() {
       return;
     }
 
-    axios.post('http://localhost:5000/api/posts', { title, content, answers, nickname, imageUrl })
+    axios.post('http://34.47.87.5:5000/api/posts', { title, content, answers, nickname, imageUrl })
       .then(() => {
         navigate('/');
       })
@@ -90,7 +90,7 @@ function CreatePost() {
         />
         {imageUrl && (
           <div className="mt-3">
-            <img src={`http://localhost:5000${imageUrl}`} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+            <img src={`http://34.47.87.5:5000${imageUrl}`} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px' }} />
           </div>
         )}
       </div>
